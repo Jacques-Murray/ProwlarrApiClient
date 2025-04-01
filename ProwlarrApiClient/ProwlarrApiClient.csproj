@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Prowlarr API Client</Title>
+    <Description>A C# client library for interacting with the Prowlarr API.</Description>
+    <Copyright>Copyright (c) Jacques Murray 2025</Copyright>
+    <PackageProjectUrl>https://github.com/Jacques-Murray/ProwlarrApiClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Jacques-Murray/ProwlarrApiClient</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>prowlarr;api;client;rest;wrapper</PackageTags>
+  </PropertyGroup>
+
+</Project>
