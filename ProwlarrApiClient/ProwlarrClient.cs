@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ProwlarrApiClient
+namespace JacquesMurray.ProwlarrApiClient
 {
     /// <summary>
     /// Client for interacting with the Prowlarr API (v1).

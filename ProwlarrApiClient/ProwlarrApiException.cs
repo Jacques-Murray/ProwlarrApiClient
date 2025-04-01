@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ProwlarrApiClient
+namespace JacquesMurray.ProwlarrApiClient
 {
     /// <summary>
     /// Represents errors that occur during Prowlarr API interactions.

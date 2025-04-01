@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ProwlarrApiClient.Models
+namespace JacquesMurray.ProwlarrApiClient.Models
 {
     /// <summary>
     /// Represents an application Prowlarr can sync indexers to.
