@@ -283,5 +283,45 @@ namespace ProwlarrApiClient
 
             return await PutAsync<Indexer, Indexer>($"api/v1/indexer/{indexerToUpdate.Id}", indexerToUpdate, cancellationToken).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Deletes an indexer by its ID. Corresponds to DELETE /api/v1/indexer/{id}.
+        /// </summary>
+        /// <param name="indexerId">The ID of the indexer to delete.</param>
+        /// <param name="cancellationToken">A token to cancel the request.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if indexerId is not positive.</exception>
+        /// <exception cref="ProwlarrApiException">Thrown if the API request fails.</exception>
+        public async Task DeleteIndexerAsync(int indexerId, CancellationToken cancellationToken = default)
+        {
+            if (indexerId <= 0) throw new ArgumentOutOfRangeException(nameof(indexerId), "Indexer ID must be positive.");
+            await DeleteAsync($"api/v1/indexer/{indexerId}", cancellationToken).ConfigureAwait(false);
+        }
+
+        // -- IDisposable Implementation
+
+        /// <summary>
+        /// Releases the resources used by the <see cref="ProwlarrClient"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this); // Prevent finalizer from running if Dispose was called.
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    // Dispose managed state (managed objects).
+                    _httpClient?.Dispose();
+                }
+
+                // Free unmanaged resources (unmanaged objects) and override finalizer.
+                // Set large fields to null
+                _disposed = true;
+            }
+        }
     }
 }
