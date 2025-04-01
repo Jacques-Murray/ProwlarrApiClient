@@ -230,11 +230,58 @@ namespace ProwlarrApiClient
         /// <param name="cancellationToken">A token to cancel the request.</param>
         /// <returns>A list of <see cref="Indexer"/> objects.</returns>
         /// <exception cref="ProwlarrApiException">Thrown if the API request fails.</exception>
-        public async Task<List<indexer>> GetIndexersAsync(CancellationToken cancellationToken = default)
+        public async Task<List<Indexer>> GetIndexersAsync(CancellationToken cancellationToken = default)
         {
             // Prowlarr might return null instead of an empty array if no indexers exist.
             var result = await GetAsync<List<Indexer>?>("api/v1/indexer", cancellationToken).ConfigureAwait(false);
             return result ?? new List<Indexer>(); // Return empty list if API returns null.
+        }
+
+        /// <summary>
+        /// Gets a specific indexer by its ID. Corresponds to /api/v1/indexer/{id}.
+        /// </summary>
+        /// <param name="indexerId">The ID of the indexer to retrieve.</param>
+        /// <param name="cancellationToken">A token to cancel the request.</param>
+        /// <returns>The requested, <see cref="Indexer"/> object.</returns>
+        /// <exception cref="ProwlarrApiException">Thrown if the API request fails (e.g., indexer not found - 404).</exception>
+        public async Task<Indexer> GetIndexerByIdAsync(int indexerId, CancellationToken cancellationToken = default)
+        {
+            if (indexerId <= 0) throw new ArgumentOutOfRangeException(nameof(indexerId), "Indexer ID must be positive.");
+            return await GetAsync<Indexer>($"api/v1/indexer/{indexerId}", cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new Indexer. Corresponds to POST /api/v1/indexer.
+        /// </summary>
+        /// <param name="newIndexer">The indexer configuration to add. The ID property should typicall be 0 or omitted.</param>
+        /// <param name="cancellationToken">A token to cancel the request.</param>
+        /// <returns>The newly created <see cref="Indexer"/> object, including its assigned ID.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if newIndexer is null.</exception>
+        /// <exception cref="ProwlarrApiException">Thrown if the API request fails.</exception>
+        public async Task<Indexer> AddIndexerAsync(Indexer newIndexer, CancellationToken cancellationToken = default)
+        {
+            ArgumentNullException.ThrowIfNull(newIndexer);
+            // Optionally add validation for required fields in newIndexer here.
+            return await PostAsync<Indexer, Indexer>("api/v1/indexer", newIndexer, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Updates an existing indexer. Corresponds to PUT /api/v1/indexer/{id}.
+        /// </summary>
+        /// <param name="indexerToUpdate">The indexer configuration with updated values. The ID must match the indexer to update.</param>
+        /// <param name="cancellationToken">A token to cancel the request.</param>
+        /// <returns>The updated <see cref="Indexer"/> object.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if indexerToUpdate is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if indexerToUpdate has an invalid ID.</exception>
+        /// <exception cref="ProwlarrApiException">Thrown if the API request fails.</exception>
+        public async Task<Indexer> UpdateIndexerAsync(Indexer indexerToUpdate, CancellationToken cancellationToken = default)
+        {
+            ArgumentNullException.ThrowIfNull(indexerToUpdate);
+            if (indexerToUpdate.Id <= 0) throw new ArgumentException("Indexer must have a valid positive ID for update.", nameof(indexerToUpdate));
+
+            // Optionally add more validation here
+
+            return await PutAsync<Indexer, Indexer>($"api/v1/indexer/{indexerToUpdate.Id}", indexerToUpdate, cancellationToken).ConfigureAwait(false);
         }
     }
 }
