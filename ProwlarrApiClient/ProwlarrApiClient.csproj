@@ -12,6 +12,8 @@
     <RepositoryUrl>https://github.com/Jacques-Murray/ProwlarrApiClient</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>prowlarr;api;client;rest;wrapper</PackageTags>
+    <Authors>JacquesMurray</Authors>
+    <PackageId>JacquesMurray.$(AssemblyName)</PackageId>
   </PropertyGroup>
 
 </Project>

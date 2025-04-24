@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ProwlarrApiClient.Models
+namespace JacquesMurray.ProwlarrApiClient.Models
 {
     /// <summary>
     /// Represents the system status information returned by the Prowlarr API.

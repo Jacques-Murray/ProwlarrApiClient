@@ -1,9 +1,9 @@
-﻿using ProwlarrApiClient.Models;
+﻿using JacquesMurray.ProwlarrApiClient.Models;
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 
-namespace ProwlarrApiClient
+namespace JacquesMurray.ProwlarrApiClient
 {
     /// <summary>
     /// Client for interacting with the Prowlarr API (v1).
