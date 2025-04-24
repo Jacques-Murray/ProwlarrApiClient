@@ -40,19 +40,4 @@ namespace JacquesMurray.ProwlarrApiClient.Models
         // --- Add other common properties as needed based on API docs ---
     }
 
-    /// <summary>
-    /// Represents a single configuration field for an application.
-    /// (Similar structure to IndexerField, potentially could be reused or have a base class)
-    /// </summary>
-    public class ApplicationField
-    {
-        /// <summary>Gets or sets the name of the field.</summary>
-        [JsonPropertyName("name")]
-        public string? Name { get; set; }
-
-        /// <summary>Gets or sets the value of the field.</summary>
-        /// <remarks>Can be string, number, boolean, or null.</remarks>
-        [JsonPropertyName("value")]
-        public JsonElement Value { get; set; }
-    }
 }
